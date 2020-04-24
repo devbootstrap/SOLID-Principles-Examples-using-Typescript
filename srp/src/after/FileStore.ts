@@ -13,8 +13,8 @@ export default class FileStore {
   }
 
   public async save(id: number, message: string): Promise<any> {
-    this.logger.saving(1)
-    var fileFullName = this.getFileInfo(id)
+    this.logger.saving(id);
+    var fileFullName = this.getFileInfo(id);
     await fsp.writeFile(fileFullName, message)
       .then(() => this.logger.saved(id))
       .catch((err: any) => this.logger.errorSaving(id))
@@ -23,13 +23,11 @@ export default class FileStore {
   public read(id: number): string {
     var fileFullName = this.getFileInfo(id);
     var exists = fs.existsSync(fileFullName);
-    if(exists) {
-      var data = fs.readFileSync(fileFullName, {encoding: 'ASCII'});
-      return data;
-    } else {
+    if(!exists) {
       this.logger.didNotFind(id);
       return ''
     }
+    return fs.readFileSync(fileFullName, {encoding: 'ASCII'});
   }
 
   public getFileInfo(id: number) {

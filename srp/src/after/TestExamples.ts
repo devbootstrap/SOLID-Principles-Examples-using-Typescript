@@ -25,6 +25,14 @@ console.log(message2) // Should be '....'
 var filestore = new FileStore( "./testfiles")
 var fileInfo = filestore.getFileInfo(1)
 console.log(fileInfo);
-filestore.save(1, 'balllllls 1')
-var fileMessage1 = filestore.read(1)
-console.log(fileMessage1)
+
+(async () => {
+  await filestore.save(1, 'Message File 1')
+  var fileMessage1 = filestore.read(1)
+  console.log(fileMessage1)
+  var fileMessage2 = filestore.read(2)
+  console.log(fileMessage2)
+  await filestore.save(2, 'Message File 2')
+  var fileMessage2 = filestore.read(2)
+  console.log(fileMessage2)
+})();
