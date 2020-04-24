@@ -1,4 +1,4 @@
-# SOLID Principals Examples using Typescript
+# SOLID Principles Examples using Typescript
 
 ## What is SOLID
 
