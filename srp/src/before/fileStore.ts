@@ -17,7 +17,7 @@ class FileStore {
     await fsp.writeFile(fileFullName, message).then(() => {
       this.cache[id] = message;
       console.log("Message saved:", id);
-    }).catch((error: any) => console.log('There was an error: ', error))
+    }).catch((err: any) => console.error('There was an error: ', err))
   }
 
   public read(id: number): string {
@@ -53,7 +53,7 @@ class FileStore {
 let filestore = new FileStore("./testfiles");
 
 // Wrap the tests in an async anonymous function
-// so that we can call await on filestore i/o
+// so that we can call await on filestore writes
 (async () => {
   await filestore.save(1, 'This message 1');
   console.log("Check Cache @1: ", filestore.checkCache())

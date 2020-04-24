@@ -1,5 +1,7 @@
 # SOLID Principles Examples using Typescript
 
+This tutorial was insprired from the [Encapsulation SOLID](https://app.pluralsight.com/library/courses/encapsulation-solid/table-of-contents) course on Pluralsigt.
+
 ## What is SOLID
 
 SOLID is an acronym for the following:
