@@ -12,7 +12,7 @@ Another way of putting this would be to say each class should do one thing and d
 
 ## Reasons for Change
 
-What is the reason for the [FileStore class](./src/before/fileStore.ts) to change (Answer is below!):
+What is the reason for the [FileStore class](./src/before/FileStore.ts) to change (Answer is below!):
 
 The answers are:
 
@@ -25,11 +25,30 @@ The answers are:
 
 What we do is take each one of the reasons for change listed above and extract into a separate class.
 
-So firstly, let's extract all _logging logic_ into a new class called [StoreLogger](./src/after/storeLogger.ts) like so. Note that it is domain specific for our Store and not just a generic Logger.
+So firstly, let's extract all _logging logic_ into a new class called [StoreLogger](./src/after/StoreLogger.ts) like so. Note that it is domain specific for our Store and not just a generic Logger.
 
 What we have done is extracted all the various log calls to a new class. Now this means that if we want to change the logging framework that we use - perhaps because the open source project that built the logger framework becomes depreciated or we find a better solution well now we can change in just this one place.
 
-To use this new logger, we create an instance of it in the [message store class](./src/after/messageStore.ts) - perviously called FileStore (I'll explain why the name was changed below).
+To use this new logger, we create an instance of it in the [message store class](./src/after/MessageStore.ts) - perviously called FileStore (I'll explain why the name was changed below).
+
+Now we replace the calls to `console.xyz(...)` to `this.log.xyz(...)` for example:
+
+* Replace: `console.log(“some message: ”, id)`
+* With: `this.log.Saving(id)`
+
+The next thing we need to extract is the logic for caching which can be applied in pretty much the same way. We create a new class [StoreCache](./src/after/StoreCache.ts).
+
+Then we need to create an instance of this class in our MessageStore class and call that instead through the implementation.
+
+```
+this.cache = new StoreCache(); // in the MessageStore constructor
+---
+this.cache.AddOrUpdate(id, message); // in the Save method
+```
+
+Next reason to change that we can address is the way that we apply storage. This will allow us to change where we save files - perhaps to a relational database instead of a filestore- who knows! So what we do is create a separate class called FileSore that is just for reading / writing files to the filestore and use that in our MessageStore class in the same way as before.
+
+So what are we left with? A better implementation for this class that is now split into other classes each with a Single Responsibility!
 
 ## Running the application
 
