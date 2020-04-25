@@ -4,9 +4,9 @@ export default class StoreCache {
   cache: any;
   logger: StoreLogger;
 
-  constructor() {
+  constructor(_logger: StoreLogger) {
     this.cache = {}
-    this.logger = new StoreLogger();
+    this.logger = _logger
   }
 
   public addOrUpdate(id: number, message: string): void {
@@ -14,6 +14,7 @@ export default class StoreCache {
   }
 
   public getOrAdd(id: number, message?: string): string {
+    this.logger.readingCache(id)
     if(!this.exists(id)) {
       if(message===undefined) {
         throw new Error("Message expected when file does not exist");

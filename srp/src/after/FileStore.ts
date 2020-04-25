@@ -7,9 +7,9 @@ export default class FileStore {
   directory: string
   logger: StoreLogger
 
-  constructor(_directory: string) {
+  constructor(_directory: string, _logger: StoreLogger) {
     this.directory = _directory;
-    this.logger = new StoreLogger()
+    this.logger = _logger;
   }
 
   public async save(id: number, message: string): Promise<any> {
@@ -21,6 +21,7 @@ export default class FileStore {
   }
 
   public read(id: number): string {
+    this.logger.readingFilestore(id)
     var fileFullName = this.getFileInfo(id);
     var exists = fs.existsSync(fileFullName);
     if(!exists) {

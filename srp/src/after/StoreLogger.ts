@@ -5,8 +5,11 @@ export default class StoreLogger {
   public saved(id: number): void {
     console.info(`Saved message ${id}.`)
   }
-  public reading(id: number): void {
-    console.debug(`Reading message ${id}.`)
+  public readingFilestore(id: number): void {
+    console.debug(`Reading message ${id} from FileStore.`)
+  }
+  public readingCache(id: number): void {
+    console.debug(`Reading message ${id} from StoreCache.`)
   }
   public didNotFind(id: number): void {
     console.debug(`No message ${id} found.`)

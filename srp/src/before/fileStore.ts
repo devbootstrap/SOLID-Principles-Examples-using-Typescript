@@ -40,7 +40,7 @@ export default class FileStore {
 
   /**
    *
-   * @param id the id of the file to create
+   * @param id the id of the file to read
    *
    * Function checks if the file exists and
    * if not returns an empty string.
