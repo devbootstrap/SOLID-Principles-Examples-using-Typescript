@@ -7,7 +7,7 @@ This tutorial was insprired from the [Encapsulation SOLID](https://app.pluralsig
 SOLID is an acronym for the following:
 
 * **S** - Single Responsibility Principle ([SRP](./srp))
-* **O** - Open Closed Principle (OCP)
+* **O** - Open Closed Principle ([OCP](./ocp))
 * **L** - Liskov Substitution Principle (LSP)
 * **I** - Interface Segregation Principle (ISP)
 * **D** - Dependency Inversion Principle (DIP)
