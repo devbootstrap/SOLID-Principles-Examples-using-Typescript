@@ -14,7 +14,7 @@ Naturally, if you break this principle and modify a core class functionality tha
 
 Note that this principle is based around examples of Inheritance and so therefore the examples will be based on Inheritance. However, later on we will show how we prefer composition over inheritance as a general rule.
 
-## Example: Extending the behaviour StoreLogger Class and using that in instances of MessageStore
+## Example: Extending the behaviour StoreLogger Class
 
 We could use inheritance to redefine one of our classes, for example the [StoreLogger](./src/StoreLogger.ts) class. We could redefine each of the methods with calls to a different type of logger solution and call that the [StoreLoggerSplunk](./src/StoreLoggerSplunk.ts) class since we may want to log to a remote [Splunk](https://www.splunk.com/) application.
 
@@ -26,7 +26,7 @@ So the solution is to provide a new _getter method_ in the [MessageStore](./src/
 
 So the getter method in the MessageStore class looks like this:
 
-```
+```ts
 get Logger() {
   return this.logger;
 }
@@ -36,7 +36,7 @@ get Logger() {
 
 We then create a hypothetical [StoreLoggerSplunk](./src/StoreLoggerSplunk.ts) class that simply extends StoreLogger and routes all calls to (a fake) Splunk endpoint. Here is a sample of that code:
 
-```
+```ts
 import StoreLogger from './StoreLogger'
 
 export default class StoreLoggerSplunk extends StoreLogger {
@@ -44,13 +44,25 @@ export default class StoreLoggerSplunk extends StoreLogger {
     this.SplunkLogger(`Saving message ${id}.`)
   }
 
-  .... etc
+  // etc
 
   private SplunkLogger(log: string) {
     console.log("Logged to Splunk: ", log);
   }
 }
 ```
+
+To use this new type of logger we also need to extend the MessageStore and then redefine the getter method defined earlier to fetch the logger like so:
+
+```ts
+export default class CustomMessageStore extends MessageStore {
+  get Logger() {
+    return new StoreLoggerSplunk()
+  }
+}
+```
+
+Now we can use this new class and it will behave exactly as before with just one change - it now logs to Splunk! Take a look at [TestExamples](./src/TestExamples.ts) for an example on how to do this.
 
 ## Running the application
 
