@@ -40,7 +40,7 @@ The next thing we need to extract is the logic for caching which can be applied 
 
 Then we need to create an instance of this class in our MessageStore class and call that instead through the implementation.
 
-```
+```ts
 this.cache = new StoreCache(); // in the MessageStore constructor
 ---
 this.cache.AddOrUpdate(id, message); // in the Save method

@@ -17,8 +17,6 @@ export default class MessageStore {
    * A getter that returns an instance of logger
    * Purpose of this is to be able to extend this class
    * and use a different type of logger (that inherits from StoreLogger)
-   *
-   * For usage example see the TestExamples file.
    */
   get Logger() {
     return this.logger;
