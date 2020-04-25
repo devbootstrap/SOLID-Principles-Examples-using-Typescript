@@ -1,4 +1,3 @@
-import { promises as fsp } from 'fs';
 import fs from 'fs';
 import path from 'path'
 import StoreLogger from './StoreLogger'
@@ -19,12 +18,15 @@ export default class FileStore implements IStore {
     this.logger = _logger;
   }
 
-  public async save(id: number, message: string): Promise<any> {
+  public save(id: number, message: string): void {
     this.logger.saving(id);
     var fileFullName = this.getFileInfo(id);
-    await fsp.writeFile(fileFullName, message)
-      .then(() => this.logger.saved(id))
-      .catch((err: any) => {this.logger.errorSaving(id)})
+    try {
+      fs.writeFileSync(fileFullName, message)
+    } catch (err) {
+      this.logger.errorSaving(id);
+    }
+    this.logger.saved(id)
   }
 
   public read(id: number): string {

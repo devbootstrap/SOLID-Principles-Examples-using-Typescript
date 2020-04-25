@@ -1,9 +1,10 @@
 import FileStore from "./FileStore";
 import StoreCache from "./StoreCache";
 import StoreLogger from "./StoreLogger";
+import IStore from "./IStore";
 
 export default class MessageStore {
-  store : FileStore;
+  store : IStore;
   cache: StoreCache;
   logger: StoreLogger;
 
@@ -23,6 +24,14 @@ export default class MessageStore {
   }
 
   /**
+   * A getter that returns an instance of store
+   * Purpose of this is to be able to use a different type of store
+   * that would implement the IStore interface
+   */
+  get Store() {
+    return this.store;
+  }
+  /**
    *
    * @param id the id of the file to save
    * @param message the text message to write to the file
@@ -32,8 +41,8 @@ export default class MessageStore {
    * formed as a .txt file using the pattern id.txt. Its saved
    * in the relative directory as set in the constructor.
    */
-  public async save (id: number, message: string) {
-    await this.store.save(id, message);
+  public save (id: number, message: string) {
+    this.Store.save(id, message);
     this.cache.addOrUpdate(id, message);
   }
 
@@ -50,7 +59,7 @@ export default class MessageStore {
    */
   public read(id: number): string {
     var message = this.cache.getOrAdd(
-      id, () => this.store.read(id))
+      id, () => this.Store.read(id))
     return message
   }
 }

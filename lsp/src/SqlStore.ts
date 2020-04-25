@@ -12,9 +12,8 @@ import IStore from './IStore'
  * Note also this is just for demo purpose only!
  */
 export default class SqlStore implements IStore {
-  save(id: number, message: string): Promise<any> {
+  save(id: number, message: string): void {
     // Write to database code would go here
-    return new Promise((res, rej) => {})
   }
   read(id: number): string {
     // Read from database here
