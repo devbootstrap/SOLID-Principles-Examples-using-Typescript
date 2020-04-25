@@ -8,11 +8,11 @@ The Single Responsibility Principle defines that a class should have a single re
 
 A definition of responsibility is to have a reason to change. So, therefore, a class should only have one reason to change. This is fundamentally based on the need to separate the concerns. So if we have a need in our application for logging or caching or storing or whatever then these concerns need to be separated and written into separate classes each with their own SRP.
 
-Another way of putting this would be to say each class should do one thing and do it well. The UNIX operating system is built on this principle and has thrived on it. UNIX has a number of CLIs / command line applications that do one thing very well, like `grep` or `sed` and these can be composed into applications or scripts or combined using pipes (|) very easily to make larger, more complex systems.
+Another way of putting this would be to say **each class should do one thing and do it well**. The UNIX operating system is built on this principle and has thrived on it. UNIX has a number of CLIs / command line applications that do one thing very well, like `grep` or `sed` and these can be composed into applications or scripts or combined using pipes (|) very easily to make larger, more complex systems.
 
 ## Reasons for Change
 
-What is the reason for the [FileStore class](./src/before/FileStore.ts) to change (Answer is below!):
+What is the reason for the [FileStore](./src/before/FileStore.ts) class to change (Answer is below!):
 
 The answers are:
 
@@ -46,7 +46,7 @@ this.cache = new StoreCache(); // in the MessageStore constructor
 this.cache.AddOrUpdate(id, message); // in the Save method
 ```
 
-Next reason to change that we can address is the way that we apply storage. This will allow us to change where we save files - perhaps to a relational database instead of a filestore- who knows! So what we do is create a separate class called FileSore that is just for reading / writing files to the filestore and use that in our MessageStore class in the same way as before.
+Next reason to change that we can address is the way that we apply storage. This will allow us to change where we save files - perhaps to a relational database instead of a filestore - who knows! So what we do is create a separate class called FileSore that is just for reading / writing files to the filestore and use that in our [MessageStore](./src/after/MessageStore.ts) class in the same way as before.
 
 So what are we left with? A better implementation for this class that is now split into other classes each with a Single Responsibility!
 
@@ -71,5 +71,6 @@ Alternatively, you can compile the TypeScript files and then run the output Java
 
 ```
 npm run build
-node dist/person.js
+node dist/before/TestExamples.js
+node dist/after/TestExamples.js
 ```
