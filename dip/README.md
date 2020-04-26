@@ -6,7 +6,33 @@ We are progressing on from the LSP excercise so we are essentially refactoring  
 
 ## What is the Dependency Invesion Principle?
 
-[TODO]
+This states that high level modules should not depend on low level modules. Both should depend on abstractions.
+
+Moreover, abstractions should not depend on details. The details should depend on abstractions.
+
+So in a way this is closely related to the Interface Segregation Principle in that clients own the interface. So a client can talk to an abstraction because it owns the interface and whatever is on the other side of that abstraction is an implementation detail.
+
+### Refactoring the application
+
+In this application we mostly applied a combination of the **composite** and **decorator** patterns.
+
+The main approach is to include the [IStoreReader](./src/IStoreReader.ts) and [IStoreWriter](./src/IStoreWriter.ts) interfaces in the [FileStore](./src/FileStore.ts), [StoreCache](./src/StoreCache.ts) and [StoreLogger](./src/StoreLogger.ts) classes and then to compoose everything within the StoreLoggger so that it acts as the definitive _reader_ and _writer_ implementation.
+
+What we end up with is the [MessageStore](./src/MessageStore.ts) effectivly becomes redundant in this example. However, if there was originally some business logic then this is where it would live.
+
+In order to use this implemetnation the client needs to compose the objects in such away so that htey adhear to the requirements of the applications interface. Such a composition to use the application might look like the following example:
+
+```ts
+var directory = "./testfiles";
+var filestore = new FileStore(directory);
+var cache = new StoreCache(filestore, filestore);
+var logger = new StoreLogger(cache, cache);
+var messagestore = new MessageStore(logger, logger)
+
+// Now we can use our messagestore instance
+messagestore.save(99, 'Message 99 is a very important message!')
+var msg99 = messagestore.read(99)
+```
 
 ## Running the application
 
