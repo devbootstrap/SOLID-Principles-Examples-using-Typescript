@@ -9,7 +9,7 @@ SOLID is an acronym for the following:
 * **S** - Single Responsibility Principle ([SRP](./srp))
 * **O** - Open Closed Principle ([OCP](./ocp))
 * **L** - Liskov Substitution Principle ([LSP](./lsp))
-* **I** - Interface Segregation Principle (ISP)
+* **I** - Interface Segregation Principle ([ISP](./isp))
 * **D** - Dependency Inversion Principle (DIP)
 
 Navigate to the separate folder linked above in this repo for further explainations and an example application written in [Typescript](https://www.typescriptlang.org/).
