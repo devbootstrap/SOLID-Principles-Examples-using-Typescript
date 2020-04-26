@@ -23,9 +23,16 @@ export default class FileStore implements IStore, IStoreWriter, IFileLocator {
 
   public save(id: number, message: string): void {
     this.logger.saving(id, message);
+
     // Below is how we might use LogSavedStoreWriter
-    // But we will not since it breaks OCP !!
+    // But we will not since it breaks OCP !! Because
+    // the client cannot change the implentation of
+    // the logger class if we use this approach.
+    // NOTEL: A solution is in the next exercise (which is
+    // to use composition instead of inheritance)
+
     // new LogSavingStoreWriter().save(id, message);
+
     var fileFullName = this.getFileInfo(id);
     try {
       fs.writeFileSync(fileFullName, message)
@@ -33,8 +40,10 @@ export default class FileStore implements IStore, IStoreWriter, IFileLocator {
       this.logger.errorSaving(id);
     }
     this.logger.saved(id, message);
+
     // Below is how we might use LogSavedStoreWriter
-    // But we will not since it breaks OCP !!
+    // We don't use this for the same reasons as mentioned above
+
     // new LogSavedStoreWriter().save(id, message);
   }
 
