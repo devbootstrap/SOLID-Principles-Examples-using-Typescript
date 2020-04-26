@@ -2,11 +2,13 @@ import FileStore from "./FileStore";
 import StoreCache from "./StoreCache";
 import StoreLogger from "./StoreLogger";
 import IStore from "./IStore";
+import IStoreCache from "./IStoreCache";
+import IStoreLogger from "./IStoreLogger";
 
 export default class MessageStore {
   store : IStore;
-  cache: StoreCache;
-  logger: StoreLogger;
+  cache: IStoreCache;
+  logger: IStoreLogger;
 
   constructor(directory: string) {
     this.logger = new StoreLogger();
@@ -19,7 +21,7 @@ export default class MessageStore {
    * Purpose of this is to be able to extend this class
    * and use a different type of logger (that inherits from StoreLogger)
    */
-  get Logger() {
+  get Logger(): IStoreLogger {
     return this.logger;
   }
 
@@ -28,9 +30,19 @@ export default class MessageStore {
    * Purpose of this is to be able to use a different type of store
    * that would implement the IStore interface
    */
-  get Store() {
+  get Store(): IStore {
     return this.store;
   }
+
+  /**
+   * A getter that returns an instance of cache
+   * Purpose of this is to be able to use a different type of cache
+   * that would implement the IStore interface
+   */
+  get Cache(): IStoreCache {
+    return this.cache;
+  }
+
   /**
    *
    * @param id the id of the file to save
@@ -43,7 +55,7 @@ export default class MessageStore {
    */
   public save (id: number, message: string) {
     this.Store.save(id, message);
-    this.cache.addOrUpdate(id, message);
+    this.Cache.save(id, message);
   }
 
    /**
@@ -58,7 +70,7 @@ export default class MessageStore {
    * @returns message string
    */
   public read(id: number): string {
-    var message = this.cache.getOrAdd(
+    var message = this.Cache.getOrAdd(
       id, () => this.Store.read(id))
     return message
   }

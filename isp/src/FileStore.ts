@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path'
-import StoreLogger from './StoreLogger'
 import IStore from './IStore'
 import IFileLocator from './IFileLocator';
+import IStoreLogger from './IStoreLogger';
+import IStoreWriter from './IStoreWriter';
 
 /**
  * A class that allows for messages to be stored in
@@ -11,24 +12,30 @@ import IFileLocator from './IFileLocator';
  * Note this class implements the IStore interface
  * and now also the IFileLocator interface
  */
-export default class FileStore implements IStore, IFileLocator {
+export default class FileStore implements IStore, IStoreWriter, IFileLocator {
   directory: string
-  logger: StoreLogger
+  logger: IStoreLogger
 
-  constructor(_directory: string, _logger: StoreLogger) {
+  constructor(_directory: string, _logger: IStoreLogger) {
     this.directory = _directory;
     this.logger = _logger;
   }
 
   public save(id: number, message: string): void {
-    this.logger.saving(id);
+    this.logger.saving(id, message);
+    // Below is how we might use LogSavedStoreWriter
+    // But we will not since it breaks OCP !!
+    // new LogSavingStoreWriter().save(id, message);
     var fileFullName = this.getFileInfo(id);
     try {
       fs.writeFileSync(fileFullName, message)
     } catch (err) {
       this.logger.errorSaving(id);
     }
-    this.logger.saved(id)
+    this.logger.saved(id, message);
+    // Below is how we might use LogSavedStoreWriter
+    // But we will not since it breaks OCP !!
+    // new LogSavedStoreWriter().save(id, message);
   }
 
   public read(id: number): string {

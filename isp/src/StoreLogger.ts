@@ -1,4 +1,9 @@
-export default class StoreLogger {
+import IStoreLogger from "./IStoreLogger"
+
+/**
+ * Note we now implement IStoreLogger
+ */
+export default class StoreLogger implements IStoreLogger {
   public saving(id: number): void {
     console.log(`Saving message ${id}.`)
   }

@@ -4,7 +4,8 @@
   "description": "An example application to demo the Interface Segregation Principal",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "Darren Jensen",
