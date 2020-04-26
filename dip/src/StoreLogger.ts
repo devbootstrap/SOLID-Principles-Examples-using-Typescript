@@ -1,12 +1,27 @@
 import IStoreLogger from "./IStoreLogger"
 import IStoreWriter from "./IStoreWriter"
+import IStoreReader from "./IStoreReader";
 
-export default class StoreLogger implements IStoreLogger, IStoreWriter {
+export default class StoreLogger implements IStoreLogger, IStoreWriter, IStoreReader {
   writer: IStoreWriter
+  reader: IStoreReader
 
-  constructor(_writer: IStoreWriter){
+  constructor(_writer: IStoreWriter, _reader: IStoreReader){
     this.writer = _writer;
+    this.reader = _reader;
   }
+
+  public read(id: number): string {
+    this.reading(id)
+    var retValue = this.reader.read(id);
+    if(retValue === undefined){
+      this.didNotFind(id)
+    } else {
+      this.returning(id)
+    }
+    return retValue;
+  }
+
   public save(id: number, message: string): void {
     this.saving(id);
     this.writer.save(id, message);
@@ -21,12 +36,8 @@ export default class StoreLogger implements IStoreLogger, IStoreWriter {
     console.info(`Saved message ${id}.`)
   }
 
-  public readingFilestore(id: number): void {
-    console.debug(`Reading message ${id} from FileStore.`)
-  }
-
-  public readingCache(id: number): void {
-    console.debug(`Reading message ${id} from StoreCache.`)
+  public reading(id: number): void {
+    console.debug(`Reading message ${id}`)
   }
 
   public didNotFind(id: number): void {

@@ -5,21 +5,26 @@ import IStore from "./IStore";
 import IStoreCache from "./IStoreCache";
 import IStoreLogger from "./IStoreLogger";
 import IStoreWriter from "./IStoreWriter";
+import IStoreReader from "./IStoreReader";
 
 export default class MessageStore {
   store : IStore;
   cache: IStoreCache;
   logger: IStoreLogger;
   writer: IStoreWriter;
+  reader: IStoreReader;
 
   constructor(directory: string) {
     var fileStore = new FileStore(directory);
-    var cache = new StoreCache(fileStore);
-    var logger = new StoreLogger(cache);
+    // fileStore implements IStoreReader & IStoreWriter
+    // so we pass that into the StoreCache as two params
+    var cache = new StoreCache(fileStore, fileStore);
+    var logger = new StoreLogger(cache, cache);
     this.cache = cache;
     this.store = fileStore;
     this.logger = logger;
     this.writer = logger;
+    this.reader = logger;
   }
 
   /**
@@ -59,6 +64,15 @@ export default class MessageStore {
   }
 
   /**
+   * A getter that returns an instance of a writer composite
+   * Purpose of this is to be able to use a different type of writer composite
+   * that would implement the IStoreWriter interface
+   */
+  get Reader(): IStoreReader {
+    return this.reader;
+  }
+
+  /**
    *
    * @param id the id of the file to save
    * @param message the text message to write to the file
@@ -69,8 +83,7 @@ export default class MessageStore {
    * in the relative directory as set in the constructor.
    */
   public save (id: number, message: string) {
-    this.Store.save(id, message);
-    this.Cache.save(id, message);
+    this.Writer.save(id, message);
   }
 
    /**
@@ -85,8 +98,6 @@ export default class MessageStore {
    * @returns message string
    */
   public read(id: number): string {
-    var message = this.Cache.getOrAdd(
-      id, () => this.Store.read(id))
-    return message
+    return this.Reader.read(id);
   }
 }
