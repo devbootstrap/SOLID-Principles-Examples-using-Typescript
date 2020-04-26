@@ -22,7 +22,7 @@ So you can think of the correctness of the system as the superset of all the cor
 So for example if you implement an interface that does not require or its not possible to implement a method based on that interface then a typicle thing to do is to throw an exception stating that the method is not implemented or not supported. Here in this [SqlStore](./src/SqlStore.ts) example we throw a new Error and pass in the appropriate message `throw new Error("Method not implemented.");`. Doing this violates the Liskov Substitution Principle.
 
 ```ts
-export default class SqlStore implements IStore {
+class SqlStore implements IStore {
   save(id: number, message: string): void {
     // Write to database code would go here
   }
@@ -56,7 +56,7 @@ This is when you take a concrete class and extract an interface from it. If you 
 The below extracted [IStore](./src/IStore.ts) interface from the [FileStore](./src/FileStore.ts) concrete class does, in fact, violate ISP (in the implemtation of it in SqlStore example above).
 
 ```ts
-export default interface IStore {
+interface IStore {
   save(id: number, message: string): void
   read(id: number): string
   getFileInfo(id: number): string
