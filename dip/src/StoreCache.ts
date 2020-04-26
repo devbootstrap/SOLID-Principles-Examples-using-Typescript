@@ -2,7 +2,7 @@ import IStoreWriter from './IStoreWriter';
 import IStoreReader from './IStoreReader';
 
 export default class StoreCache implements IStoreWriter, IStoreReader {
-  cache: any;
+  cache: { [key: number]: string }
   writer: IStoreWriter;
   reader: IStoreReader;
 
