@@ -17,11 +17,7 @@ export default class FileStore implements IStoreReader, IStoreWriter, IFileLocat
 
   public save(id: number, message: string): void {
     var fileFullName = this.getFileInfo(id);
-    try {
-      fs.writeFileSync(fileFullName, message)
-    } catch (err) {
-      // this.logger.errorSaving(id);
-    }
+    fs.writeFileSync(fileFullName, message)
   }
 
   public read(id: number): string {

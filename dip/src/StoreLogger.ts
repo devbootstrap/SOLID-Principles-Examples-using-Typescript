@@ -23,7 +23,11 @@ export default class StoreLogger implements IStoreWriter, IStoreReader {
 
   public save(id: number, message: string): void {
     this.saving(id);
-    this.writer.save(id, message);
+    try {
+      this.writer.save(id, message);
+    } catch (err) {
+      this.errorSaving(id)
+    }
     this.saved(id);
   }
 
