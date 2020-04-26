@@ -1,8 +1,7 @@
-import IStoreCache from './IStoreCache'
 import IStoreWriter from './IStoreWriter';
 import IStoreReader from './IStoreReader';
 
-export default class StoreCache implements IStoreCache, IStoreWriter, IStoreReader {
+export default class StoreCache implements IStoreWriter, IStoreReader {
   cache: any;
   writer: IStoreWriter;
   reader: IStoreReader;

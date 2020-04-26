@@ -1,17 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import IStore from './IStore';
 import IFileLocator from './IFileLocator';
 import IStoreWriter from './IStoreWriter';
+import IStoreReader from './IStoreReader';
 
 /**
  * A class that allows for messages to be stored in
  * a local file system
- *
- * Note this class implements the IStore interface
- * and now also the IFileLocator interface
  */
-export default class FileStore implements IStore, IStoreWriter, IFileLocator {
+export default class FileStore implements IStoreReader, IStoreWriter, IFileLocator {
   directory: string
 
   constructor(_directory: string) {

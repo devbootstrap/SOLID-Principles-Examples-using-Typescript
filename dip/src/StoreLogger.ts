@@ -1,8 +1,7 @@
-import IStoreLogger from "./IStoreLogger"
 import IStoreWriter from "./IStoreWriter"
 import IStoreReader from "./IStoreReader";
 
-export default class StoreLogger implements IStoreLogger, IStoreWriter, IStoreReader {
+export default class StoreLogger implements IStoreWriter, IStoreReader {
   writer: IStoreWriter
   reader: IStoreReader
 
