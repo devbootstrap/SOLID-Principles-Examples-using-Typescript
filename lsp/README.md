@@ -19,7 +19,31 @@ So you can think of the correctness of the system as the superset of all the cor
 
 ### Throwing _NotSupportedException_ (or similar).
 
-So for example if you implement an interface that does not require or its not possible to implement a method based on that interface then a typicle thing to do is to throw an exception stating that the method is not implemented or not supported. Here in this TypeScript example we throw a new Error and pass in the appropriate message `throw new Error("Method not implemented.");`. Doing this violates the Liskov Substitution Principle.
+So for example if you implement an interface that does not require or its not possible to implement a method based on that interface then a typicle thing to do is to throw an exception stating that the method is not implemented or not supported. Here in this [SqlStore](./src/SqlStore.ts) example we throw a new Error and pass in the appropriate message `throw new Error("Method not implemented.");`. Doing this violates the Liskov Substitution Principle.
+
+```ts
+export default class SqlStore implements IStore {
+  save(id: number, message: string): void {
+    // Write to database code would go here
+  }
+  read(id: number): string {
+    // Read from database here
+    return ''
+  }
+  /**
+   * Note that we need to throw 'Method not implemented' here
+   * because in the context of the SqlStore the 'getFileInfo'
+   * method is not required.
+   *
+   * Note: THIS BREAKS LSP!! We will discuss a solution to this later.
+   */
+  getFileInfo(id: number): string {
+    throw new Error("Method not implemented.");
+  }
+}
+```
+
+As noted in the code comments we will discuss how to fix this in later lessons.
 
 ### Downcasts
 
@@ -28,6 +52,16 @@ Another reason is if you are using downcasts a lot in your code to check which i
 ### Extracted Interfaces
 
 This is when you take a concrete class and extract an interface from it. If you end up creating many interfaces (perhaps via the IDE that you use) and you just select to implement all methods of the concrete class into that interface then you can be at risk of violating the LSP.
+
+The below extracted [IStore](./src/IStore.ts) interface from the [FileStore](./src/FileStore.ts) concrete class does, in fact, violate ISP (in the implemtation of it in SqlStore example above).
+
+```ts
+export default interface IStore {
+  save(id: number, message: string): void
+  read(id: number): string
+  getFileInfo(id: number): string
+}
+```
 
 ## Running the application
 
