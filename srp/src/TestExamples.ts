@@ -7,7 +7,9 @@ import path from 'path'
 
 var dirtest = "./testfiles";
 var dirpath = path.join(__dirname,  dirtest)
-fs.mkdirSync(dirpath)
+if(!fs.existsSync(dirpath)){
+  fs.mkdirSync(dirpath)
+}
 
 // Test the StoreLogger class
 console.log("** Test the StoreLogger class **")

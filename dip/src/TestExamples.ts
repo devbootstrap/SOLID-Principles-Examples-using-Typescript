@@ -3,9 +3,17 @@ import FileStore from "./FileStore";
 import StoreCache from "./StoreCache";
 import StoreLogger from "./StoreLogger";
 
-var directory = "./testfiles";
+import fs from 'fs';
+import path from 'path'
+
+var dirtest = "./testfiles";
+var dirpath = path.join(__dirname,  dirtest)
+if(!fs.existsSync(dirpath)){
+  fs.mkdirSync(dirpath)
+}
+
 // 'Compose' our objects ....
-var fileStore = new FileStore(directory);
+var fileStore = new FileStore(dirtest);
 var cache = new StoreCache(fileStore, fileStore);
 var logger = new StoreLogger(cache, cache);
 var messagestore = new MessageStore(logger, logger)
