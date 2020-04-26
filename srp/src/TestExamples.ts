@@ -2,6 +2,12 @@ import StoreLogger from './StoreLogger'
 import StoreCache from './StoreCache'
 import FileStore from './FileStore'
 import MessageStore from './MessageStore';
+import fs from 'fs';
+import path from 'path'
+
+var dirtest = "./testfiles";
+var dirpath = path.join(__dirname,  dirtest)
+fs.mkdirSync(dirpath)
 
 // Test the StoreLogger class
 console.log("** Test the StoreLogger class **")
@@ -31,8 +37,7 @@ console.log();
   // Test the FileStore class
   console.log("** Test the FileStore class **")
   console.log()
-  var directory = "./testfiles"
-  var filestore = new FileStore(directory, logger)
+  var filestore = new FileStore(dirtest, logger)
   var fileInfo = filestore.getFileInfo(1)
   console.log(fileInfo);
   await filestore.save(1, 'Message File 1')
@@ -48,7 +53,7 @@ console.log();
   // Test the MessageStore class
   console.log("** Test the MessageStore class **")
   console.log()
-  var messagestore = new MessageStore(directory);
+  var messagestore = new MessageStore(dirtest);
   await messagestore.save(99, 'Message 99 saved via MessageStore class')
   var fileMessage99 = messagestore.read(99)
   console.log(fileMessage99)

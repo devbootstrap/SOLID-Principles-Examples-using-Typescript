@@ -1,6 +1,5 @@
 */node_modules
 */dist
-*/src/*/testfiles/*.txt
-*/src/testfiles/*.txt
+*/src/testfiles
 
 TODO.txt
