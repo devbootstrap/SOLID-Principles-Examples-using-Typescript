@@ -41,9 +41,6 @@ describe('StoreCache', () => {
     })
   })
   describe('IStoreReader', () => {
-    beforeEach(()=> {
-
-    })
     describe('when existing message is read', () => {
       it('returns the message string', () => {
         expect(cache.read(id)).toBe(msg)

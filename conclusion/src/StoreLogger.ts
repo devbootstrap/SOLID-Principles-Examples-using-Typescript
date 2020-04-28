@@ -26,6 +26,7 @@ export default class StoreLogger implements IStoreWriter, IStoreReader {
     try {
       this.writer.save(id, message);
     } catch (err) {
+      console.log(err)
       this.errorSaving(id)
     }
     this.saved(id);
