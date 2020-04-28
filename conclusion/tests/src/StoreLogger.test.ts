@@ -1,18 +1,13 @@
 import StoreLogger from '../../src/StoreLogger'
+import mockstore from './mockstore'
 
 describe('StoreLogger', () => {
   var logger: StoreLogger;
-  var mockstore: any
   var consolelog = console.log;
   var consoleinfo = console.info;
   var consoledebug = console.debug;
   var consoleerror = console.error;
   beforeEach(()=> {
-    // mockstore needs to be the same shape as the IStoreWriter and IStoreReader
-    mockstore = {
-      read: jest.fn((id: number) => 'Message'),
-      save: jest.fn((id: number, message: string) => {})
-    };
     // mock console.log calls since we are testing this
     console.log = jest.fn();
     console.info = jest.fn();

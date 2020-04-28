@@ -9,7 +9,7 @@ import path from 'path'
 var dirtest = "./testfiles";
 var dirpath = path.join(__dirname,  dirtest)
 if(!fs.existsSync(dirpath)){
-  // fs.mkdirSync(dirpath)
+  fs.mkdirSync(dirpath)
 }
 
 // 'Compose' our objects ....
