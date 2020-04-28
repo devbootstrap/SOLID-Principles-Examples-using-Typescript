@@ -1,0 +1,22 @@
+{
+  "name": "solid-conclusion-example",
+  "version": "1.0.0",
+  "description": "The concluding example application to demo the SOLID Priniples",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "testwatch": "jest --watch",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Darren Jensen",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "jest": "^25.4.0",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  }
+}

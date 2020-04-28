@@ -14,10 +14,26 @@ SOLID is an acronym for the following:
 
 ## How to use this tutorial
 
-Start with the original file [FileStore.ts](./FileStore.ts) and we then take that and apply refectorings step by step in the order of SOLID.
+Start with the original file here the [start](./start) folder and we then take that and apply refectorings step by step in the order of SOLID.
 
 So prehaps take a look at the original file as a reference. As you can see all the functionality is included in this file and none of the SOLID priniples have yet to be applied. Then move to each priniple one at a time folowing the same order of SOLID.
 
-If you want to jump directly to the final solution, that is once all the SOLID priniples have been applied to this original file, then take a look at the code in the ependency Inversion Principle ([DIP](./dip)) folder. In that code **all** the SOLID principles have been applied. If you want a sort of journey on how we got there, I suggest following each step at a time.
+If you want to jump directly to the final solution, that is once all the SOLID priniples have been applied to this original file, then take a look at the code in the [conclusion](./conslusion)) folder. In that code **all** the SOLID principles have been applied. If you want a sort of journey on how we got there, I suggest following each step at a time.
 
 So, what are you waiting for? Navigate to the separate folder linked above in this repo for further explainations and an example application written in [Typescript](https://www.typescriptlang.org/).
+
+### Issue Reporting
+
+If you experience with bugs or need further improvement, please create a new issue under [Issues](https://github.com/devbootstrap/SOLID-Principles-Examples-using-Typescript/issues).
+
+### Contributing to this SOLID journey!
+
+Pull requests are very welcome. Before submitting a pull request, please make sure that your changes are well tested.
+
+### License
+
+This **Star Notary Ethereum Dapp** application is released under [AGPL](http://www.gnu.org/licenses/agpl-3.0-standalone.html)
+
+### Disclaimer
+
+This application is part of a _project assignment_ and is most definitely __not__ suitable for Production use! :)
