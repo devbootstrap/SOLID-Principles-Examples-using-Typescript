@@ -2,14 +2,14 @@
 
 This is a basic TypeScript application to demo the Liskov Substitution Principle (LSP).
 
-We are progressing on from the OCP excercise so we are essentially refactoring  the code that already exists in [../ocp/src](../ocp/src) folder. Please refer to that code as a starting reference.
+We are progressing on from the OCP excercise so we are essentially refactoring the code that already exists in [../ocp/src](../ocp/src) folder. Please refer to that code as a starting reference.
 
 ## What is the Liskov Substitution Principle?
 
 The LSP can be defined as the following:
 
 * Subtypes must be substitutable for their base types OR (another way....)
-* Given any client, it should be able to any implementation of an interface without changing the correctness of the system
+* Given any client, it should be able to apply any implementation of an interface without changing the correctness of the system
 
 So what does the **correctness of the system** mean? Well for starters, it's not about changing the behaviour of the system because polymorphism is about changing the behaviour. Ultimately the correctness of the system is application specific but one high level idea is that any software system should not crash so if a client uses implementation A of an interface and the system does not crash, but then uses implementation B of an interface and the system DOES crash then you can say that you have changed the correctness of the system. That's a high level generic explanation as to the correctness of the system.
 
@@ -19,7 +19,7 @@ So you can think of the correctness of the system as the superset of all the cor
 
 ### Throwing _NotSupportedException_ (or similar).
 
-So for example if you implement an interface that does not require or its not possible to implement a method based on that interface then a typicle thing to do is to throw an exception stating that the method is not implemented or not supported. Here in this [SqlStore](./src/SqlStore.ts) example we throw a new Error and pass in the appropriate message `throw new Error("Method not implemented.");`. Doing this violates the Liskov Substitution Principle.
+So for example if you implement an interface that does not require or its not possible to implement a method based on that interface then a typical thing to do is to throw an exception stating that the method is not implemented or not supported. Here in this [SqlStore](./src/SqlStore.ts) example we throw a new Error and pass in the appropriate message `throw new Error("Method not implemented.");`. Doing this violates the Liskov Substitution Principle.
 
 ```ts
 class SqlStore implements IStore {

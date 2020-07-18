@@ -2,7 +2,7 @@ import IStore from './IStore'
 // Note since deriving the SqlStore as simply an
 // extenstion of FileStore does not make sense
 // we instead create an interface IStore and use that
-// class SqlStore extends FileStore <- this
+// class SqlStore extends FileStore <- this does not make sense
 
 /**
  * A class that allows for messages to be stored in
@@ -19,6 +19,7 @@ export default class SqlStore implements IStore {
     // Read from database here
     return ''
   }
+
   /**
    * Note that we need to throw 'Method not implemented' here
    * because in the context of the SqlStore the 'getFileInfo'
