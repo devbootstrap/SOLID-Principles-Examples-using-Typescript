@@ -36,7 +36,7 @@ export default interface IFileLocator {
 
 Note that in the in the [SqlStore](./src/SqlStore.ts) class the getFileInfo method has been removed.
 
-We also exctracted some commonality. One thing is that there are many cases of different classes using a message call `xyz(id: number, message: string): void`. Note that I call this xyz becuase when looking for a common interface the method name can be ignored for the time being and we only need to focus on the input parameters and the response type. So here the input was alwayws `id:numeber` and `message:string` with a return of `void`. So we can define a new interface that defines that method format as an [IStoreWriter](.src/IStoreWriter.ts) interface. As you can see its a good example of a _role interface_.
+We also exctracted some commonality. One thing is that there are many cases of different classes using a message call `xyz(id: number, message: string): void`. Note that I call this xyz becuase when looking for a common interface the method name can be ignored for the time being and we only need to focus on the input parameters and the response type. So here the input was alwayws `id:number` and `message:string` with a return of `void`. So we can define a new interface that defines that method format as an [IStoreWriter](.src/IStoreWriter.ts) interface. As you can see its a good example of a _role interface_.
 
 ```ts
 export default interface IStoreWriter {
@@ -48,7 +48,7 @@ This can now be implemented in the [FileStore](./src/FileStore.ts) and [SqlStore
 
 ### Further refactoring to create log classes that can implement IStoreWriter
 
-As you can see we also added two new classes [LogSaveedStoreWriter](./src/LogSaveedStoreWriter.ts) and [LogSavingStoreWriter](./src/LogSavingStoreWriter.ts). However, these are just examples to show how we found other uses of methods with the same signature but with differnt names and in order to get the same name we needed these two new classes. However, this does indeed break the Open Closed Priniple. So we will solve this in the next module by using composition instead of inheritance.
+As you can see we also added two new classes [LogSavedStoreWriter](./src/LogSaveedStoreWriter.ts) and [LogSavingStoreWriter](./src/LogSavingStoreWriter.ts). However, these are just examples to show how we found other uses of methods with the same signature but with differnt names and in order to get the same name we needed these two new classes. However, this does indeed break the Open Closed Priniple. So we will solve this in the next module by using composition instead of inheritance.
 
 ## Running the application
 

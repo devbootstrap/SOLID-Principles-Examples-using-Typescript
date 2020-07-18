@@ -22,7 +22,7 @@ export default class MessageStore {
    * @param message the text message to write to storage
    *
    */
-  public save (id: number, message: string) {
+  public save(id: number, message: string) {
     this.writer.save(id, message);
   }
 

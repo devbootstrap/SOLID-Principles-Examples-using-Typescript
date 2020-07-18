@@ -1,10 +1,10 @@
-# Dependency InvesionPrinciple
+# Dependency Inversion Principle
 
 This is a basic TypeScript application to demo the Dependency InvesionPrinciple (ISP).
 
 We are progressing on from the LSP excercise so we are essentially refactoring  the code that already exists in [../isp/src](../isp/src) folder. Please refer to that code as a starting reference.
 
-## What is the Dependency Invesion Principle?
+## What is the Dependency Inversion Principle?
 
 This states that high level modules should not depend on low level modules. Both should depend on abstractions.
 
@@ -16,11 +16,11 @@ So in a way this is closely related to the Interface Segregation Principle in th
 
 In this application we mostly applied a combination of the **composite** and **decorator** patterns.
 
-The main approach is to include the [IStoreReader](./src/IStoreReader.ts) and [IStoreWriter](./src/IStoreWriter.ts) interfaces in the [FileStore](./src/FileStore.ts), [StoreCache](./src/StoreCache.ts) and [StoreLogger](./src/StoreLogger.ts) classes and then to compoose everything within the StoreLoggger so that it acts as the definitive _reader_ and _writer_ implementation.
+The main approach is to include the [IStoreReader](./src/IStoreReader.ts) and [IStoreWriter](./src/IStoreWriter.ts) interfaces in the [FileStore](./src/FileStore.ts), [StoreCache](./src/StoreCache.ts) and [StoreLogger](./src/StoreLogger.ts) classes and then to compoose everything within the StoreLogger so that it acts as the definitive _reader_ and _writer_ implementation.
 
 What we end up with is the [MessageStore](./src/MessageStore.ts) effectivly becomes redundant in this example. However, if there was originally some business logic then this is where it would live.
 
-In order to use this implemetnation the client needs to compose the objects in such away so that htey adhear to the requirements of the applications interface. Such a composition to use the application might look like the following example:
+In order to use this implemetnation the client needs to compose the objects in such away so that they adhear to the requirements of the applications interface. Such a composition to use the application might look like the following example:
 
 ```ts
 var directory = "./testfiles";
