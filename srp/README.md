@@ -12,7 +12,7 @@ Another way of putting this would be to say **each class should do one thing and
 
 ## Reasons for Change
 
-What is the reason for the [FileStore](./src/before/FileStore.ts) class to change (Answer is below!):
+What is the reason for the [FileStore](../start/src/FileStore.ts) class to change (Answer is below!):
 
 The answers are:
 
@@ -63,7 +63,7 @@ npm install
 Now, it should be possible to run the application using the following commands. Note this is the _first step_ that we are taking to refactor the original file which is in the root of this project which is the file [FileStore.ts](../FileStore.ts).
 
 ```
-npx ts-node src/TestExamples.ts
+ts-node src/TestExamples.ts
 ```
 
 Alternatively, you can compile the TypeScript files and then run the output JavaScript files form the resuling `dist` folder:

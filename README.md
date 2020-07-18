@@ -1,6 +1,6 @@
 # SOLID Principles Examples using Typescript
 
-This tutorial was insprired from the [Encapsulation SOLID](https://app.pluralsight.com/library/courses/encapsulation-solid/table-of-contents) course on Pluralsigt.
+This tutorial was insprired from the [Encapsulation SOLID](https://app.pluralsight.com/library/courses/encapsulation-solid/table-of-contents) course on Pluralsight.
 
 ## What is SOLID
 
@@ -18,7 +18,7 @@ Start with the original file here the [start](./start) folder and we then take t
 
 So prehaps take a look at the original file as a reference. As you can see all the functionality is included in this file and none of the SOLID priniples have yet to be applied. Then move to each priniple one at a time folowing the same order of SOLID.
 
-If you want to jump directly to the final solution, that is once all the SOLID priniples have been applied to this original file, then take a look at the code in the [conclusion](./conslusion)) folder. In that code **all** the SOLID principles have been applied. If you want a sort of journey on how we got there, I suggest following each step at a time.
+If you want to jump directly to the final solution, that is once all the SOLID priniples have been applied to this original file, then take a look at the code in the [conclusion](./conclusion)) folder. In that code **all** the SOLID principles have been applied. If you want a sort of journey on how we got there, I suggest following each step at a time.
 
 So, what are you waiting for? Navigate to the separate folder linked above in this repo for further explainations and an example application written in [Typescript](https://www.typescriptlang.org/).
 
@@ -32,8 +32,8 @@ Pull requests are very welcome. Before submitting a pull request, please make su
 
 ### License
 
-This **Star Notary Ethereum Dapp** application is released under [AGPL](http://www.gnu.org/licenses/agpl-3.0-standalone.html)
+This application is released under [AGPL](http://www.gnu.org/licenses/agpl-3.0-standalone.html)
 
 ### Disclaimer
 
-This application is part of a _project assignment_ and is most definitely __not__ suitable for Production use! :)
+This application is part of a _research and learning project_ and is most definitely __not__ suitable for Production use! :)
